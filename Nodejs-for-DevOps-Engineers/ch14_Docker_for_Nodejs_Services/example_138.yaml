@@ -1,0 +1,25 @@
+# Book: Node.js for DevOps Engineers — Example 138
+# compose.yaml
+services:
+  tracking:
+    build:
+      context: .
+      target: build
+    command: ["node", "--watch", "src/server.js"]
+    ports: ["3000:3000"]
+    environment:
+      DATABASE_URL: postgres://kes:kes@db:5432/tracking
+    volumes:
+      - ./src:/app/src
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: kes
+      POSTGRES_PASSWORD: kes
+      POSTGRES_DB: tracking
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "kes"]
+      interval: 2s

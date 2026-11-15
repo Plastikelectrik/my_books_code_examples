@@ -1,0 +1,27 @@
+# Book: Node.js for DevOps Engineers — Example 226
+# services/tracking/service.yaml
+name: tracking
+description: Parcel tracking API and public pages
+owner:
+  team: core
+  chat: C-core-alerts
+  oncall: core-primary
+tier: 1
+runtime:
+  kind: kubernetes
+  namespace: tracking
+  deployment: tracking
+  container: app
+health:
+  url: https://api.example.com/tracking/livez
+deploy:
+  strategy: canary
+  steps: [5, 25, 50, 100]
+  bakeMinutes: 5
+slo:
+  availability: 99.5
+  latencyP95Ms: 400
+dependencies: [auth, postgres-tracking]
+links:
+  dashboard: https://grafana.example.com/d/tracking
+  runbook: https://wiki.example.com/runbooks/tracking

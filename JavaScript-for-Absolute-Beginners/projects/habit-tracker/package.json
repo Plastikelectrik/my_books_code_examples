@@ -1,0 +1,5 @@
+{
+  "name": "habit-tracker",
+  "type": "module",
+  "scripts": { "start": "npx serve ." }
+}

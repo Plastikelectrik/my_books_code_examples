@@ -1,0 +1,36 @@
+# Book: Node.js for DevOps Engineers — Example 122
+# .github/workflows/release.yml
+name: release
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  id-token: write
+  packages: write
+
+concurrency: release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm test
+      - run: |
+          git config user.name "kes-release-bot"
+          git config user.email "bot@example.com"
+      - id: rel
+        run: node src/cli.js release --json > release.json
+      - run: git push --follow-tags
+      - run: npm publish --provenance --access public
+        if: hashFiles('release.json') != ''

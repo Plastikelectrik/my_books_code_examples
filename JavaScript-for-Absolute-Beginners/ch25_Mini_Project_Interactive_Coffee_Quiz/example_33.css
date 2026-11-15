@@ -1,0 +1,41 @@
+/* Book: JavaScript for Absolute Beginners — Example 33 */
+/* quiz.css */
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #fdf8f3;
+  color: #2b2118;
+}
+#app {
+  max-width: 34rem;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+#options {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+button {
+  font: inherit;
+  padding: 0.75rem 1rem;
+  border-radius: 0.6rem;
+  border: 2px solid #8a4b2a;
+  background: white;
+  color: #2b2118;
+  cursor: pointer;
+  text-align: left;
+}
+#start-btn, #next-btn, #again-btn {
+  background: #8a4b2a;
+  color: white;
+  text-align: center;
+}
+button:disabled { cursor: default; }
+.correct { background: #d8f5d0; border-color: #3a8f2c; }
+.wrong { background: #fbd9d6; border-color: #c0392b; }
+#progress { color: #8a6f5c; font-size: 0.9rem; }
+.hidden { display: none; }

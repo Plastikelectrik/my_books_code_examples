@@ -1,0 +1,17 @@
+# Book: Node.js for DevOps Engineers — Example 113
+# actions/deploy-preview/action.yml
+name: Deploy preview
+description: Comment the deployment plan on a pull request
+inputs:
+  service:
+    description: Service name
+    required: true
+  token:
+    description: Token with pull-requests write
+    default: ${{ github.token }}
+outputs:
+  image:
+    description: Image that will be built
+runs:
+  using: node24
+  main: dist/index.js

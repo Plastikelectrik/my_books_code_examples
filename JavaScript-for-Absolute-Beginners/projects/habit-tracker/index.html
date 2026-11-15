@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1">
+    <title>Habit Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Daily Habits</h1>
+      <p id="summary"></p>
+    </header>
+    <main>
+      <form id="add-form" novalidate>
+        <input id="emoji" name="emoji" value="✅"
+          maxlength="2" aria-label="Emoji">
+        <input id="name" name="name"
+          placeholder="New habit, e.g. Order beans"
+          aria-label="Habit name">
+        <button type="submit">Add</button>
+      </form>
+      <p id="form-error" class="error" hidden></p>
+      <div id="days-header" class="row"></div>
+      <ul id="habit-list"></ul>
+      <p id="empty" hidden>No habits yet. Add one!</p>
+    </main>
+  </body>
+</html>

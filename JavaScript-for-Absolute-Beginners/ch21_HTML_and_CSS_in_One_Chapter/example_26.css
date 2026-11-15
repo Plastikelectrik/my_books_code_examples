@@ -1,0 +1,79 @@
+/* Book: JavaScript for Absolute Beginners — Example 26 */
+/* style.css */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: #fdf8f3;
+  color: #2b2118;
+  line-height: 1.5;
+}
+
+header {
+  background: #8a4b2a;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+}
+
+.tagline {
+  margin: 0.25rem 0 0;
+  opacity: 0.85;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+#menu-list {
+  list-style: none;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+}
+
+.vegan::after {
+  content: " 🌱";
+}
+
+button {
+  background: #8a4b2a;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #6d3a20;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #6b5a4d;
+}

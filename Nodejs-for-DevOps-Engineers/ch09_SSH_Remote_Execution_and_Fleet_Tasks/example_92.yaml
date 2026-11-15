@@ -1,0 +1,18 @@
+# Book: Node.js for DevOps Engineers — Example 92
+# inventory.yaml
+defaults:
+  user: deploy
+hosts:
+  - name: db-1.eu
+    groups: [db, eu]
+    tags: { role: primary }
+  - name: db-2.eu
+    groups: [db, eu]
+    tags: { role: replica }
+  - name: build-1
+    groups: [build]
+  - name: build-2
+    groups: [build]
+  - name: edge-lisbon
+    groups: [edge, eu]
+    user: edgeops

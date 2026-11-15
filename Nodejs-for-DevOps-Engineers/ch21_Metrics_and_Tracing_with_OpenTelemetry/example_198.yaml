@@ -1,0 +1,27 @@
+# Book: Node.js for DevOps Engineers — Example 198
+# otel-collector.yaml
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+processors:
+  batch: {}
+  filter/health:
+    traces:
+      span:
+        - 'attributes["url.path"] == "/livez"'
+        - 'attributes["url.path"] == "/readyz"'
+exporters:
+  otlphttp:
+    endpoint: https://otlp.observability.example.com
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [filter/health, batch]
+      exporters: [otlphttp]
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlphttp]
