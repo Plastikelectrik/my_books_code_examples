@@ -1,0 +1,59 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Home Chatbot</title>
+<style>
+ body{font-family:sans-serif;max-width:40em;margin:auto}
+ .msg{padding:.5em;margin:.3em;border-radius:8px}
+ .user{background:#fde2ef} .bot{background:#f3f3f3}
+</style></head><body>
+<h2>Home Chatbot</h2>
+<div id="log"></div>
+<input id="q" style="width:70%" placeholder="Ask...">
+<button onclick="send()">Send</button>
+<button id="rec">Mic</button>
+<button onclick="speak()">Play</button>
+<script>
+const msgs = []; let last = "";
+function add(cls, text){
+  const d = document.createElement("div");
+  d.className = "msg " + cls; d.textContent = text;
+  log.appendChild(d); return d; }
+async function send(text){
+  text = text || q.value; q.value = "";
+  msgs.push({role:"user", content:text});
+  add("user", text);
+  const box = add("bot", "");
+  const r = await fetch("/api/chat", {method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({messages:msgs})});
+  const reader = r.body.getReader();
+  const dec = new TextDecoder();
+  while (true){
+    const {done, value} = await reader.read();
+    if (done) break;
+    box.textContent += dec.decode(value);
+  }
+  last = box.textContent;
+  msgs.push({role:"assistant", content:last}); }
+async function speak(){
+  const r = await fetch("/api/tts", {method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({text:last})});
+  new Audio(URL.createObjectURL(await r.blob())).play(); }
+let rec, parts = [];
+document.getElementById("rec").onclick = async () => {
+  if (rec && rec.state === "recording"){
+    rec.stop(); return; }
+  const s = await navigator.mediaDevices
+      .getUserMedia({audio:true});
+  rec = new MediaRecorder(s); parts = [];
+  rec.ondataavailable = e => parts.push(e.data);
+  rec.onstop = async () => {
+    const fd = new FormData();
+    fd.append("audio", new Blob(parts), "q.webm");
+    const r = await fetch("/api/stt",
+        {method:"POST", body:fd});
+    send((await r.json()).text); };
+  rec.start(); };
+</script></body></html>

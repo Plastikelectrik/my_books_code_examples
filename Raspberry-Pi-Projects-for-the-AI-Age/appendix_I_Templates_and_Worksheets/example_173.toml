@@ -1,0 +1,11 @@
+[project]
+name = "my-project"
+log_level = "INFO"
+
+[network]
+host = "192.168.1.2"
+port = 8080
+
+[secrets]
+# keep this file private: chmod 600 settings.toml
+password = "change-me"

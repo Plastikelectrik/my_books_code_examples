@@ -1,0 +1,2 @@
+swapon --show
+free -h

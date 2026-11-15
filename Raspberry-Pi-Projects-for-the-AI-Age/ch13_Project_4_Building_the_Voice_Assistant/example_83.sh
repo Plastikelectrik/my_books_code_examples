@@ -1,0 +1,2 @@
+arecord -l
+aplay -l

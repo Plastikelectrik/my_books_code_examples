@@ -1,0 +1,22 @@
+mqtt:
+  host: 192.168.1.2
+detectors:
+  hailo:
+    type: hailo8l          # or hailo8
+    device: PCIe
+cameras:
+  garden:
+    ffmpeg:
+      inputs:
+        - path: rtsp://user:pass@192.168.1.60/stream1
+          roles: [detect, record]
+    detect:
+      width: 1280
+      height: 720
+      fps: 5
+    objects:
+      track: [person]
+record:
+  enabled: true
+  retain:
+    days: 3

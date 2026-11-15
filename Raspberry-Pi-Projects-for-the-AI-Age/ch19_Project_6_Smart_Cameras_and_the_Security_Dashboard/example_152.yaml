@@ -1,0 +1,18 @@
+services:
+  frigate:
+    container_name: frigate
+    image: ghcr.io/blakeblackshear/frigate:stable
+    restart: unless-stopped
+    shm_size: "256mb"
+    devices:
+      - /dev/hailo0:/dev/hailo0
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./config:/config
+      - /srv/frigate:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+    ports:
+      - "192.168.1.2:8971:8971"   # web UI, home only
