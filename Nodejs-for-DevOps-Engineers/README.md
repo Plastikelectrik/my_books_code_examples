@@ -7,8 +7,12 @@ Every numbered example from the book, organized by chapter. Example 01 → `exam
 - Install Node.js 24 or 26 LTS (`node --version`).
 - The examples use ES modules; the `package.json` in this folder sets `"type": "module"` so `.js` files run as modules.
 - Run a script with `node example_NN.js` (TypeScript examples run directly with `node example_NN.ts` on recent Node.js versions).
-- Many examples import helpers from other examples (for instance `../lib/retry.js`); the Title column shows the path each file has in the book's `kes` project, so you can recreate that layout.
+- Many examples import helpers from other examples (for instance `../lib/retry.js`); the Title column shows the path each file has in the book's `kes` project, so you can recreate that layout, or use the assembled project in `kes/`.
 - Examples that talk to GitHub, Docker, Kubernetes or a cloud provider need the matching credentials and tools; never run commands that change infrastructure against production while experimenting.
+
+## Complete project: kes
+
+The [`kes/`](kes/) folder is the runnable platform CLI from Chapter 26, assembled from the examples of the whole book, with a sample service catalogue, sample manifests and 37 tests. Start with `cd kes && npm ci && npm test && node src/cli.js --help`; see [kes/README.md](kes/README.md).
 
 ## License
 

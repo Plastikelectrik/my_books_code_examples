@@ -1,0 +1,46 @@
+# A Deployment that passes every check of "kes kube audit".
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-api
+  namespace: checkout
+spec:
+  replicas: 3
+  selector:
+    matchLabels: { app: orders-api }
+  template:
+    metadata:
+      labels: { app: orders-api }
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      containers:
+        - name: app
+          image: registry.example.com/kestrel/orders-api:1.4.0
+          resources:
+            requests: { cpu: 100m, memory: 128Mi }
+            limits: { memory: 256Mi }
+          readinessProbe:
+            httpGet: { path: /readyz, port: 8080 }
+          securityContext:
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+            capabilities: { drop: [ALL] }
+---
+# One that fails: :latest image, root, no probes or limits.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: legacy-worker
+  namespace: warehouse
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: legacy-worker }
+  template:
+    metadata:
+      labels: { app: legacy-worker }
+    spec:
+      containers:
+        - name: worker
+          image: registry.example.com/kestrel/worker:latest

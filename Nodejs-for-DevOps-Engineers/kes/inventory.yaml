@@ -1,0 +1,14 @@
+# Example fleet inventory (Chapter 9). Replace with real hosts.
+defaults:
+  user: deploy
+hosts:
+  - name: db-eu-1
+    groups: [db, eu]
+    tags: { role: primary }
+  - name: db-eu-2
+    groups: [db, eu]
+    tags: { role: replica }
+  - name: build-1
+    groups: [build]
+  - name: edge-us-1
+    groups: [edge, us]

@@ -1,0 +1,42 @@
+# Example service catalogue for kes (Chapter 26).
+# Health URLs point at a local demo server: run
+#   node examples/demo-server.js
+# in another terminal before "kes health".
+services:
+  - name: orders-api
+    description: Takes and tracks customer orders
+    owner: { team: checkout, chat: "#team-checkout",
+      oncall: checkout-primary }
+    tier: 1
+    runtime: { kind: kubernetes, namespace: checkout,
+      deployment: orders-api, container: app }
+    health: { url: "http://127.0.0.1:8080/orders/healthz" }
+    deploy: { strategy: canary, steps: [5, 25, 50, 100],
+      bakeMinutes: 10 }
+    slo: { availability: 99.9, latencyP95Ms: 300 }
+    dependencies: [payments, inventory]
+    links:
+      runbook: "https://wiki.example.com/runbooks/orders-api"
+  - name: payments
+    description: Card payments and refunds
+    owner: { team: checkout, chat: "#team-checkout" }
+    tier: 1
+    runtime: { kind: kubernetes, namespace: checkout,
+      deployment: payments, container: app }
+    health: { url: "http://127.0.0.1:8080/payments/healthz" }
+    deploy: { strategy: canary }
+  - name: inventory
+    description: Stock levels per warehouse
+    owner: { team: warehouse, chat: "#team-warehouse" }
+    tier: 2
+    runtime: { kind: kubernetes, namespace: warehouse,
+      deployment: inventory, container: app }
+    health: { url: "http://127.0.0.1:8080/inventory/healthz" }
+    deploy: { strategy: rolling }
+  - name: label-printer
+    description: Prints shipping labels on demand
+    owner: { team: warehouse, chat: "#team-warehouse" }
+    tier: 3
+    runtime: { kind: function,
+      functionName: kestrel-label-printer }
+    deploy: { strategy: rolling }

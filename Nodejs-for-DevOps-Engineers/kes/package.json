@@ -1,0 +1,20 @@
+{
+  "name": "@kestrel/kes",
+  "version": "0.4.0",
+  "description": "Kestrel Logistics internal DevOps CLI, assembled from the book Node.js for DevOps Engineers",
+  "type": "module",
+  "bin": { "kes": "./src/cli.js" },
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test",
+    "check": "node --test && node src/cli.js --help"
+  },
+  "dependencies": {
+    "semver": "^7.6.3",
+    "yaml": "^2.6.1",
+    "zod": "^4.1.12"
+  },
+  "license": "MIT",
+  "private": true
+}
