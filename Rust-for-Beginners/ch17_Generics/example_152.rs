@@ -1,0 +1,13 @@
+// Book: Rust for Beginners — Example 152
+#[derive(Debug)]
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+fn main() {
+    let integer = Point { x: 5, y: 10 };
+    let float = Point { x: 1.5, y: 4.0 };
+    println!("{integer:?}");
+    println!("{float:?}");
+}

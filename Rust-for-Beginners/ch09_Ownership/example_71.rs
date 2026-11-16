@@ -1,0 +1,11 @@
+// Book: Rust for Beginners — Example 71
+fn main() {
+    let s1 = String::from("ownership");
+    let (s2, len) = calculate_length(s1);
+    println!("The length of '{s2}' is {len}.");
+}
+
+fn calculate_length(s: String) -> (String, usize) {
+    let length = s.len();
+    (s, length) // give the String back
+}
