@@ -12,6 +12,7 @@ after its number in the book (Example 01 → `example_01.*`).
 | [Nodejs-for-DevOps-Engineers](Nodejs-for-DevOps-Engineers/) | *Node.js for DevOps Engineers* | JavaScript, TypeScript, JSON, YAML |
 | [JavaScript-for-Absolute-Beginners](JavaScript-for-Absolute-Beginners/) | *JavaScript for Absolute Beginners* | JavaScript, HTML, CSS, JSON |
 | [Rust-for-Beginners](Rust-for-Beginners/) | *Rust for Beginners* | Rust, TOML configuration files |
+| [Mastering-REA-STUDIO](Mastering-REA-STUDIO/) | *Mastering REA STUDIO* | Python, shell, PowerShell, C, C#, Kotlin, Java, JavaScript, HTML, ImHex patterns, configuration files |
 
 Each folder contains a `README.md` with setup instructions and the full list of examples.
 

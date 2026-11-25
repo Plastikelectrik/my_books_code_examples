@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Kettle</title></head>
+<body>
+  <select id="tea">
+    <option>green</option><option>black</option>
+    <option>oolong</option><option>herbal</option>
+  </select>
+  <button id="go">Brew</button>
+  <p id="out"></p>
+  <script type="module">
+    import { brewTime } from "./brew.js";
+    const $ = (id) => document.getElementById(id);
+    $("go").onclick = () => {
+      const s = brewTime($("tea").value, 3);
+      $("out").textContent = s + " s";
+    };
+  </script>
+</body>
+</html>

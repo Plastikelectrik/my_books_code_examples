@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "rea": {
+      "command": "rea",
+      "args": ["mcp"],
+      "env": {
+        "GHIDRA_INSTALL_DIR": "/opt/ghidra_12.1.4_PUBLIC",
+        "REA_ANALYSIS_PROVIDER": "ghidra"
+      }
+    },
+    "ghidra": {
+      "command": "uvx",
+      "args": ["--from",
+      "git+https://github.com/LaurieWired/GhidraMCP@TAG",
+      "ghidra-mcp", "--ghidra-server",
+      "http://127.0.0.1:8080/"]
+    }
+  }
+}
